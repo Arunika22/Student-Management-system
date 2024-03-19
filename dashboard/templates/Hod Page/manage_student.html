@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hod Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script type="text/javascript" src="../assets/js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="/">
+                <div class="logo">
+                    <i class="fa-solid fa-user-tie"></i>
+                    HODAccount
+                </div>
+            </a>
+        </div>
+
+        <div class="user">
+            <div>
+                <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="user-image" />
+            </div>
+            <div class="name">username</div>
+
+            <ul>
+                <li>Logout</li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="main">
+
+        <div id="navbar">
+            <div class="menu">Menu</div>
+            <nav>
+                <a href="Hod_home.html">
+                    <li>
+                        <i class="fa fa-home"></i> Home
+                    </li>
+                </a>
+                <a href="manage_student.html">
+                    <li>
+                        <i class="fa fa-user"></i> Manage Student
+                    </li>
+                </a>
+                <a href="add_faculty.html">
+                    <li>
+                        <i class="fa-solid fa-user-group"></i>
+                        Add Faculty
+                    </li>
+                </a>
+                <a href="manage_faculty.html">
+                    <li>
+                        <i class="fa-solid fa-person-chalkboard"></i>
+                        Manage Faculty
+                    </li>
+                </a>
+                <a href="add_session.html">
+                    <li>
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Add Session
+                    </li>
+                </a>
+                <!-- <a href="manage_session.html">
+                    <li>
+                        <i class="fa-solid fa-list-check"></i>
+                        Manage Session
+                    </li>
+                </a> -->
+                <a href="add_subject.html">
+                    <li>
+                        <i class="fa-solid fa-book-medical"></i>
+                        Add Subject
+                    </li>
+                </a>
+                <a href="manage_subject.html">
+                    <li>
+                        <i class="fa-solid fa-book-bookmark"></i>
+                        Manage Subject
+                    </li>
+                </a>
+
+            </nav>
+        </div>
+
+        <div id="student_record">
+            <div class="page-title">
+                <h2>Manage Students Details</h2>
+
+
+                <dialog class="form" id="edit_dialog">
+                    <div class="close" onclick="closeEditDialog()">&times;</div>
+                    <!-- <div className="form"> -->
+                    <div class="form">
+                        <h2>Edit Student Detail</h2>
+                        <form onSubmit="return redirectToHome()" autoComplete="off">
+                            <input type="hidden" name="id" value={formResponse?.id} />
+                            <div class="form-field">
+                                <label for="student_id">Student Id</label>
+                                <input type="text" name="student_id" id="student_id" placeholder="Enter Student Id"
+                                    required />
+                            </div>
+                            <div class="form-field">
+                                <label for="fullname">Student Name</label>
+                                <input type="text" name="fullname" id="fullname" placeholder="Enter Full Name"
+                                    required />
+                            </div>
+                            <div class="form-field">
+                                <label for="department">Department</label>
+                                <select name="department" id="department" required>
+                                    <option disabled selected>
+                                        -- Choose --
+                                    </option>
+                                    <option value="CSE">
+                                        CSE
+                                    </option>
+                                    <option value="IT">
+                                        IT
+                                    </option>
+                                    <option value="ECE">
+                                        ECE
+                                    </option>
+                                    <option value="CE">
+                                        CE
+                                    </option>
+                                    <option value="EE">
+                                        EE
+                                    </option>
+                                    <option value="ME">
+                                        ME
+                                    </option>
+                                    <option value="AI">
+                                        AI
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="fullname">semester</label>
+                                <input type="number" name="semester" id="semester" placeholder="Enter Semester"
+                                    required />
+                            </div>
+                            <div class="form-field">
+                                <label for="cpga">cgpa</label>
+                                <input type="number" name="cgpa" id="cgpa" placeholder="Enter CGPA" step='any'
+                                    required />
+                            </div>
+
+
+
+
+                            <div class="form-field">
+                                <button type="submit"><a href="Hod_home.html"></a>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </dialog>
+            </div>
+
+
+            <div id="manage_student">
+                <div id="search-bar">
+                    <form action="" method="GET">
+                        <input type="search" name="search" id="search" placeholder="Search..." />
+                        <button type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </div>
+
+
+                <div id="expese-record" class="record">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Id</th>
+                                <th>Student Name</th>
+                                <th>Branch</th>
+                                <th>Semester</th>
+                                <th>Cgpa</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>0201CS211022</td>
+                                <td>Arunika Bhatacharya</td>
+                                <td>CSE</td>
+                                <td>6</td>
+                                <td>8.12</td>
+                                <td>
+                                    <div class="action">
+                                        <button class="btn edit" onclick="openEditDialog()">Edit</button>
+                                        <button class="btn delete">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- <tr>
+                                <td colspan="6">No Student Detail Available</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </div>
+        </div>
+</body>
+
+</html>
