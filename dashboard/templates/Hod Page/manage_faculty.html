@@ -56,7 +56,72 @@
 
                 <!-- Add your dialog for editing faculty details here -->
             </div>
+ <dialog class="form" id="edit_dialog">
+                <div class="close" onclick="closeEditDialog()">&times;</div>
+                <!-- <div className="form"> -->
+                <div class="form">
+                    <h2>Edit Faculty Detail</h2>
+                    <form onSubmit="return redirectToHome()" autoComplete="off">
+                        <input type="hidden" name="id" value={formResponse?.id} />
+                        <div class="form-field">
+                            <label for="faculty_id">Faculty Id</label>
+                            <input type="text" name="faculty_id" id="faculty_id" placeholder="Enter Faculty Id"
+                                required />
+                        </div>
+                        <div class="form-field">
+                            <label for="fullname">Faculty Name</label>
+                            <input type="text" name="fullname" id="fullname" placeholder="Enter Full Name"
+                                required />
+                        </div>
+                        <div class="form-field">
+                            <label for="in_out">Subject</label>
+                            <select name="in_out" id="in_out" required>
+                                <option disabled selected>
+                                    -- Choose --
+                                </option>
+                                <option value="OS">
+                                    OS
+                                </option>
+                                <option value="AI">
+                                    AI
+                                </option>
+                                <option value="ML">
+                                    ML
+                                </option>
+                                <option value="TOC">
+                                    TOC
+                                </option>
+                                <option value="DBMS">
+                                    DBMS
+                                </option>
+                                <option value="DS">
+                                    DS
+                                </option>
+                                <option value="OOPs">
+                                    OOPs
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="type">Type</label>
+                            <input type="text" name="type" id="type" placeholder="Enter type" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="weeks">No of classes/week</label>
+                            <input type="number" name="weeks" id="weeks" placeholder="Enter no. of classes / week"
+                                step='any' required />
+                        </div>
 
+
+
+
+                        <div class="form-field">
+                            <button type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </dialog>
+        </div>
             <div id="search-bar">
                 <form action="" method="GET">
                     <input type="search" name="search" id="search" placeholder="Search...">
