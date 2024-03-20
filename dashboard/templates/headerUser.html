@@ -1,0 +1,11 @@
+<div class="user">
+    <div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="user-image">
+    </div>
+    <div class="name">{{ user.username }}</div>
+
+    <ul>
+        <li><a href="{% url 'logout_user' %}">Logout</a>
+        </li>
+    </ul>
+</div>

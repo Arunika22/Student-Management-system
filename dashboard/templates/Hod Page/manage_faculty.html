@@ -25,38 +25,20 @@
             </a>
         </div>
 
-        <div class="user">
-            <div>
-                <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="user-image">
-            </div>
-            <div class="name">{{ user.username }}</div>
-
-            <ul>
-                <li>Logout</li>
-            </ul>
-        </div>
+        {% include '../headerUser.html' %}
     </header>
 
     <div id="main">
-        <div id="navbar">
-            <div class="menu">Menu</div>
-            <nav>
-                <a href="{% url 'hod_home' %}">
-                    <li>
-                        <i class="fa fa-home"></i> Home
-                    </li>
-                </a>
-                <!-- Add other navigation links here -->
-            </nav>
-        </div>
+        {% include './navigation.html' %}
+
 
         <div id="student_record">
             <div class="page-title">
                 <h2>Manage Faculty Details</h2>
-
                 <!-- Add your dialog for editing faculty details here -->
             </div>
- <dialog class="form" id="edit_dialog">
+
+            <dialog class="form" id="edit_dialog">
                 <div class="close" onclick="closeEditDialog()">&times;</div>
                 <!-- <div className="form"> -->
                 <div class="form">
@@ -68,48 +50,25 @@
                             <input type="text" name="faculty_id" id="faculty_id" placeholder="Enter Faculty Id"
                                 required />
                         </div>
+
                         <div class="form-field">
-                            <label for="fullname">Faculty Name</label>
-                            <input type="text" name="fullname" id="fullname" placeholder="Enter Full Name"
+                            <label for="first_name">First Name</label>
+                            <input type="text" name="first_name" id="first_name" placeholder="Enter First Name"
                                 required />
                         </div>
+
                         <div class="form-field">
-                            <label for="in_out">Subject</label>
-                            <select name="in_out" id="in_out" required>
-                                <option disabled selected>
-                                    -- Choose --
-                                </option>
-                                <option value="OS">
-                                    OS
-                                </option>
-                                <option value="AI">
-                                    AI
-                                </option>
-                                <option value="ML">
-                                    ML
-                                </option>
-                                <option value="TOC">
-                                    TOC
-                                </option>
-                                <option value="DBMS">
-                                    DBMS
-                                </option>
-                                <option value="DS">
-                                    DS
-                                </option>
-                                <option value="OOPs">
-                                    OOPs
-                                </option>
-                            </select>
+                            <label for="last_name">Last Name</label>
+                            <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" required />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" placeholder="Enter Username" required />
                         </div>
                         <div class="form-field">
-                            <label for="type">Type</label>
-                            <input type="text" name="type" id="type" placeholder="Enter type" required />
-                        </div>
-                        <div class="form-field">
-                            <label for="weeks">No of classes/week</label>
-                            <input type="number" name="weeks" id="weeks" placeholder="Enter no. of classes / week"
-                                step='any' required />
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Enter Email Address" required />
                         </div>
 
 
@@ -121,9 +80,9 @@
                     </form>
                 </div>
             </dialog>
-        </div>
+
             <div id="search-bar">
-                <form action="" method="GET">
+                <form action="" method="GET" class="search-form" data-search-record="#faculty-data">
                     <input type="search" name="search" id="search" placeholder="Search...">
                     <button type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -136,34 +95,38 @@
                     <thead>
                         <tr>
                             <th>Faculty Id</th>
-                            <th>Faculty Name</th>
-                            <th>Subject</th>
-                            <th>Type</th>
-                            <th>No of classes / week</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                            <th>Email Address</th>
                             <th>Action</th>
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id="faculty-data">
                         <!-- Loop through faculty records here -->
                         {% for staff in staffs %}
                         <tr>
-                        <td>{{ staff.admin.id }}</td>
-                        <td>{{ staff.admin.first_name }}</td>
-                        <td>{{ staff.admin.last_name }}</td>
-                        <td>{{ staff.admin.username }}</td>
-                        <td>{{ staff.admin.email }}</td>
-                        <td>{{ staff.address }}</td>
-                        <td>{{ staff.admin.last_login }}</td>
-                        <td>{{ staff.admin.date_joined }}</td>
-                                <div class="action">
-                                    <button class="edit btn" onclick="openEditDialog()">
-                                        Edit
-                                    </button>
-                                    <button class="delete btn">
-                                        Delete
-                                    </button>
-                                </div>
+                            <td>{{ staff.admin.id }}</td>
+                            <td>{{ staff.admin.first_name }}</td>
+                            <td>{{ staff.admin.last_name }}</td>
+                            <td>{{ staff.admin.username }}</td>
+                            <td>{{ staff.admin.email }}</td>
+                            <td class="action">
+                                <button class="edit btn" onclick="openEditDialog(event)" data-name="
+                                    \'{
+                                        'faculty_id': '{{ staff.admin.id }}',
+                                        'first_name': '{{ staff.admin.first_name }}',
+                                        'last_name': '{{ staff.admin.last_name }}',
+                                        'username': '{{ staff.admin.username }}',
+                                        'email': '{{ staff.admin.email }}'
+                                    }\' 
+                                ">
+                                    Edit
+                                </button>
+                                <button class="delete btn">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                         {% endfor %}

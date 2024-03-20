@@ -338,9 +338,8 @@ header .user:hover ul {
     opacity: 1;
 }
 
-header .user ul li {
+header .user ul li a {
     line-height: 30px;
-    cursor: pointer;
     padding: 0 10px;
     box-sizing: border-box;
     color: var(--white);

@@ -23,70 +23,13 @@
             </a>
         </div>
 
-        <div class="user">
-            <div>
-                <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="user-image" />
-            </div>
-            <div class="name">username</div>
+        {% include '../headerUser.html' %}
 
-            <ul>
-                <li>Logout</li>
-            </ul>
-        </div>
     </header>
 
     <div id="main">
-        <div id="navbar">
-            <div class="menu">Menu</div>
-            <nav>
-                <a href="Hod_home.html">
-                    <li>
-                        <i class="fa fa-home"></i> Home
-                    </li>
-                </a>
-                <a href="manage_student.html">
-                    <li>
-                        <i class="fa fa-user"></i> Manage Student
-                    </li>
-                </a>
-                <a href="add_faculty.html">
-                    <li>
-                        <i class="fa-solid fa-user-group"></i>
-                        Add Faculty
-                    </li>
-                </a>
-                <a href="manage_faculty.html">
-                    <li>
-                        <i class="fa-solid fa-person-chalkboard"></i>
-                        Manage Faculty
-                    </li>
-                </a>
-                <a href="add_session.html">
-                    <li>
-                        <i class="fa-solid fa-calendar-days"></i>
-                        Add Session
-                    </li>
-                </a>
-                <!-- <a href="manage_session.html">
-                    <li>
-                        <i class="fa-solid fa-list-check"></i>
-                        Manage Session
-                    </li>
-                </a> -->
-                <a href="add_subject.html">
-                    <li>
-                        <i class="fa-solid fa-book-medical"></i>
-                        Add Subject
-                    </li>
-                </a>
-                <a href="manage_subject.html">
-                    <li>
-                        <i class="fa-solid fa-book-bookmark"></i>
-                        Manage Subject
-                    </li>
-                </a>
-            </nav>
-        </div>
+        {% include './navigation.html' %}
+
 
         <div class="form hamburger">
             <h2>Add Subject</h2>

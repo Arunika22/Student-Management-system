@@ -23,54 +23,13 @@
             </a>
         </div>
 
-        <div class="user">
-            <div>
-                <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="user-image" />
-            </div>
-            <div class="name">username</div>
+        {% include '../headerUser.html' %}
 
-            <ul>
-                <li>Logout</li>
-            </ul>
-        </div>
     </header>
 
     <div id="main">
-        <div id="navbar">
-            <div class="menu">Menu</div>
-            <nav>
-                <a href="index.html">
-                    <li>
-                        <i class="fa fa-home"></i> Home
-                    </li>
-                </a>
-                <a href="profile.html">
-                    <li>
-                        <i class="fa fa-user"></i>
-                        Profile
-                    </li>
-                </a>
-                <a href="attendance.html">
-                    <li>
-                        <i class="fa-solid fa-user-plus"></i>
-                        Attendance
-                    </li>
-                </a>
-                <a href="notes.html">
-                    <li>
-                        <i class="fa-solid fa-book"></i>
-                        Notes
-                    </li>
-                </a>
-                <a href="videos.html">
-                    <li>
-                        <i class="fa-solid fa-video"></i>
-                        Videos
-                    </li>
-                </a>
-            </nav>
-        </div>
-    </div>
+        {% include './navigation.html' %}
+
     </div>
 </body>
 

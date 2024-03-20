@@ -15,8 +15,18 @@ function closeAddDialog() {
     document.querySelector('#add_dialog')?.close();
 }
 
-function openEditDialog() {
-    document.querySelector('#edit_dialog')?.showModal();
+function openEditDialog(e) {
+    const dialog = document.querySelector('#edit_dialog');
+    dialog?.showModal();
+
+    const form = dialog?.querySelector('form');
+
+    if(!form) return
+    console.log(e.target.dataset.name)
+    const data = JSON.parse(e.target.dataset.name);
+    console.log(data)
+
+
 }
 
 function closeEditDialog() {
@@ -30,3 +40,22 @@ function openAddAttendanceDialog() {
 function closeAddAttendanceDialog() {
     document.querySelector('#add_attendance_dialog')?.close();
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.search-form').forEach(searchForm => {
+        searchForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const input = searchForm.search,
+                searchData = input.value,
+                record = document.querySelector(searchForm.dataset.searchRecord);
+            record.querySelectorAll('tr').forEach(tr => {
+                
+                if(tr.innerText.indexOf(searchData) > -1) {
+                    tr.style.display = 'table-row';
+                }else 
+                    tr.style.display = 'none';
+            })
+        })
+    })
+})
