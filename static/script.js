@@ -7,9 +7,9 @@ function changeClass(e) {
     window.location.href = url.toString();
 }
 
-function openAddDialog() {
-    document.querySelector('#add_dialog')?.showModal();
-}
+// function openAddDialog() {
+//     document.querySelector('#add_dialog')?.showModal();
+// }
 
 function closeAddDialog() {
     document.querySelector('#add_dialog')?.close();
@@ -17,6 +17,8 @@ function closeAddDialog() {
 
 function openEditDialog() {
     document.querySelector('#edit_dialog')?.showModal();
+    //new code
+    
 }
 
 function closeEditDialog() {
@@ -30,3 +32,4 @@ function openAddAttendanceDialog() {
 function closeAddAttendanceDialog() {
     document.querySelector('#add_attendance_dialog')?.close();
 }
+

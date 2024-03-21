@@ -65,50 +65,33 @@
                         <input type="hidden" name="id" value={formResponse?.id} />
                         <div class="form-field">
                             <label for="faculty_id">Faculty Id</label>
-                            <input type="text" name="faculty_id" id="faculty_id" placeholder="Enter Faculty Id"
+                            <input type="text" name="id" id="id" placeholder="Enter Faculty Id"
                                 required />
                         </div>
                         <div class="form-field">
-                            <label for="fullname">Faculty Name</label>
-                            <input type="text" name="fullname" id="fullname" placeholder="Enter Full Name"
+                            <label for="first_name">First Name</label>
+                            <input type="text" name="first_name" id="first_name" placeholder="Enter First Name"
                                 required />
                         </div>
                         <div class="form-field">
-                            <label for="in_out">Subject</label>
-                            <select name="in_out" id="in_out" required>
-                                <option disabled selected>
-                                    -- Choose --
-                                </option>
-                                <option value="OS">
-                                    OS
-                                </option>
-                                <option value="AI">
-                                    AI
-                                </option>
-                                <option value="ML">
-                                    ML
-                                </option>
-                                <option value="TOC">
-                                    TOC
-                                </option>
-                                <option value="DBMS">
-                                    DBMS
-                                </option>
-                                <option value="DS">
-                                    DS
-                                </option>
-                                <option value="OOPs">
-                                    OOPs
-                                </option>
-                            </select>
+                            <label for="last_name">Last Name</label>
+                            <input type="text" name="last_name" id="last_name" placeholder="Enter last Name"
+                                required />
                         </div>
                         <div class="form-field">
-                            <label for="type">Type</label>
-                            <input type="text" name="type" id="type" placeholder="Enter type" required />
+                            <label for="email">Email Address</label>
+                            <input type="email" name="email" id="email" placeholder="Enter email address"
+                                required />
+                        </div>
+                        
+                              
+                        <div class="form-field">
+                            <label for="username">username</label>
+                            <input type="text" name="username" id="username" placeholder="Enter username" required />
                         </div>
                         <div class="form-field">
-                            <label for="weeks">No of classes/week</label>
-                            <input type="number" name="weeks" id="weeks" placeholder="Enter no. of classes / week"
+                            <label for="address">Address</label>
+                            <input type="text" name="address" id="address" placeholder="Enter Address"
                                 step='any' required />
                         </div>
 
@@ -122,14 +105,7 @@
                 </div>
             </dialog>
         </div>
-            <div id="search-bar">
-                <form action="" method="GET">
-                    <input type="search" name="search" id="search" placeholder="Search...">
-                    <button type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-            </div>
+            
 
             <div id="expese-record" class="record">
                 <table>
@@ -137,14 +113,14 @@
                         <tr>
                             <th>Faculty Id</th>
                             <th>First Name</th>
-                            <th>Second Name</th>
+                            <th>Last Name</th>
                             <th>Username</th>
                             <th>Email Address</th>
                             <th>Action</th>
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id ="faculty-data">
                         <!-- Loop through faculty records here -->
                         {% for staff in staffs %}
                         <tr>
@@ -155,15 +131,26 @@
                         <td>{{ staff.admin.email }}</td>
                         <td>{{ staff.address }}</td>
                         
-                                <div class="action">
+                                {% comment %} <div class="action">
                                     <button class="edit btn" onclick="openEditDialog()">
                                         Edit
                                     </button>
                                     <button class="delete btn">
                                         Delete
                                     </button>
-                                </div>
-                            </td>
+                                </div> {% endcomment %}
+                                
+                                <td class = "action">
+
+                                    <a href="{% url 'edit_staff' staff.admin.id %}"> <button class="edit btn" >
+                                        Edit
+                                    </button></a> 
+                                    <button class="delete btn">
+                                    <a href="{% url 'delete_staff' staff.admin.id %}">Delete</a>
+                                </button>
+                                </td>
+                            
+                            
                         </tr>
                         {% endfor %}
                     </tbody>
