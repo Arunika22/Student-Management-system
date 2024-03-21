@@ -38,48 +38,6 @@
                 <!-- Add your dialog for editing faculty details here -->
             </div>
 
-            <dialog class="form" id="edit_dialog">
-                <div class="close" onclick="closeEditDialog()">&times;</div>
-                <!-- <div className="form"> -->
-                <div class="form">
-                    <h2>Edit Faculty Detail</h2>
-                    <form onSubmit="return redirectToHome()" autoComplete="off">
-                        <input type="hidden" name="id" value={formResponse?.id} />
-                        <div class="form-field">
-                            <label for="faculty_id">Faculty Id</label>
-                            <input type="text" name="faculty_id" id="faculty_id" placeholder="Enter Faculty Id"
-                                required />
-                        </div>
-
-                        <div class="form-field">
-                            <label for="first_name">First Name</label>
-                            <input type="text" name="first_name" id="first_name" placeholder="Enter First Name"
-                                required />
-                        </div>
-
-                        <div class="form-field">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" required />
-                        </div>
-
-                        <div class="form-field">
-                            <label for="username">Username</label>
-                            <input type="text" name="username" id="username" placeholder="Enter Username" required />
-                        </div>
-                        <div class="form-field">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Enter Email Address" required />
-                        </div>
-
-
-
-
-                        <div class="form-field">
-                            <button type="submit">Save</button>
-                        </div>
-                    </form>
-                </div>
-            </dialog>
 
             <div id="search-bar">
                 <form action="" method="GET" class="search-form" data-search-record="#faculty-data">
@@ -99,6 +57,7 @@
                             <th>Last Name</th>
                             <th>Username</th>
                             <th>Email Address</th>
+                            <th>Address</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -112,22 +71,16 @@
                             <td>{{ staff.admin.last_name }}</td>
                             <td>{{ staff.admin.username }}</td>
                             <td>{{ staff.admin.email }}</td>
+                            <td>{{ staff.address }}</td>
                             <td class="action">
-                                <button class="edit btn" onclick="openEditDialog(event)" data-name="
-                                    \'{
-                                        'faculty_id': '{{ staff.admin.id }}',
-                                        'first_name': '{{ staff.admin.first_name }}',
-                                        'last_name': '{{ staff.admin.last_name }}',
-                                        'username': '{{ staff.admin.username }}',
-                                        'email': '{{ staff.admin.email }}'
-                                    }\' 
-                                ">
-                                    Edit
-                                </button>
-                                <button class="delete btn">
+
+                                <a href="{% url 'edit_staff' staff.admin.id %}" class="edit btn">
+                                    Edit</a>
+                                <a href="{% url 'delete_staff' staff.admin.id %}" class="delete btn">
                                     Delete
-                                </button>
+                                </a>
                             </td>
+
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -102,6 +102,7 @@ a {
     margin: 0 10px;
     padding: 0 10px;
     border-radius: 3px;
+    display: inline-block;
 }
 
 .record td .edit {
@@ -172,7 +173,8 @@ dialog .close {
 }
 
 .form .form-field input,
-.form .form-field select {
+.form .form-field select,
+.form .form-field textarea {
     max-width: 100%;
     flex: 1 1 200px;
     border-radius: 5px;
@@ -181,6 +183,10 @@ dialog .close {
     height: 35px;
     line-height: 35px;
     box-sizing: border-box;
+}
+
+.form .form-field textarea {
+    min-height: 60px;
 }
 
 .form .form-field > div {
