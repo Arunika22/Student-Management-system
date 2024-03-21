@@ -23,10 +23,16 @@
                 Manage Faculty
             </li>
         </a>
-        <a href="#">
+        <a href="{% url 'add_session' %}">
             <li>
                 <i class="fa-solid fa-calendar-days"></i>
                 Add Session
+            </li>
+        </a>
+        <a href="{% url 'manage_session' %}">
+            <li>
+                <i class="fa-solid fa-calendar-days"></i>
+               Manage Session
             </li>
         </a>
         <a href="#">
@@ -39,6 +45,18 @@
             <li>
                 <i class="fa-solid fa-book-bookmark"></i>
                 Manage Subject
+            </li>
+        </a>
+        <a href="{% url 'add_course' %}">
+            <li>
+                <i class="fa-solid fa-book-bookmark"></i>
+                Add Course
+            </li>
+        </a>
+        <a href="{% url 'manage_course' %}">
+            <li>
+                <i class="fa-solid fa-book-bookmark"></i>
+                Manage Course
             </li>
         </a>
 

@@ -27,5 +27,10 @@ urlpatterns = [
     path('edit_course/<course_id>/', HodViews.edit_course, name="edit_course"), 
     path('edit_course_save/', HodViews.edit_course_save, name="edit_course_save"), 
     path('delete_course/<course_id>/', HodViews.delete_course, name="delete_course"), 
-             
+    path('manage_session/', HodViews.manage_session, name="manage_session"), 
+    path('add_session/', HodViews.add_session, name="add_session"), 
+    path('add_session_save/', HodViews.add_session_save, name="add_session_save"), 
+    path('edit_session/<session_id>', HodViews.edit_session, name="edit_session"), 
+    path('edit_session_save/', HodViews.edit_session_save, name="edit_session_save"), 
+    path('delete_session/<session_id>/', HodViews.delete_session, name="delete_session"), 
 ]
