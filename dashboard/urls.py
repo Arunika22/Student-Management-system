@@ -15,7 +15,7 @@ urlpatterns = [
     path('add_staff_save/', HodViews.add_staff_save, name="add_staff_save"),
     path('add_staff/', HodViews.add_staff, name="add_staff"),
     path('student_home/', StudentViews.student_home, name="student_home"),
-    path('staff_home/', StaffViews.staff_home, name="staff_home"), 
+    
     path('manage_staff/', HodViews.manage_staff, name="manage_staff"),
     path('manage_staff/', HodViews.manage_staff, name="manage_staff"), 
     path('edit_staff/<staff_id>/', HodViews.edit_staff, name="edit_staff"), 
@@ -33,4 +33,22 @@ urlpatterns = [
     path('edit_session/<session_id>', HodViews.edit_session, name="edit_session"), 
     path('edit_session_save/', HodViews.edit_session_save, name="edit_session_save"), 
     path('delete_session/<session_id>/', HodViews.delete_session, name="delete_session"), 
+     path('add_student_save/', HodViews.add_student_save, name="add_student_save"), 
+    path('edit_student/<student_id>', HodViews.edit_student, name="edit_student"), 
+    path('add_student/', HodViews.add_student, name="add_student"),
+    path('edit_student_save/', HodViews.edit_student_save, name="edit_student_save"), 
+    path('manage_student/', HodViews.manage_student, name="manage_student"), 
+    path('delete_student/<student_id>/', HodViews.delete_student, name="delete_student"),
+     path('check_email_exist/', HodViews.check_email_exist, name="check_email_exist"), 
+    path('check_username_exist/', HodViews.check_username_exist, name="check_username_exist"), 
+    path('add_subject/', HodViews.add_subject, name="add_subject"), 
+    path('add_subject_save/', HodViews.add_subject_save, name="add_subject_save"), 
+    path('manage_subject/', HodViews.manage_subject, name="manage_subject"), 
+    path('edit_subject/<subject_id>/', HodViews.edit_subject, name="edit_subject"), 
+    path('edit_subject_save/', HodViews.edit_subject_save, name="edit_subject_save"), 
+    path('delete_subject/<subject_id>/', HodViews.delete_subject, name="delete_subject"), 
+    #faculty urls
+    path('staff_home/', StaffViews.staff_home, name="staff_home"), 
+    
+     
 ]

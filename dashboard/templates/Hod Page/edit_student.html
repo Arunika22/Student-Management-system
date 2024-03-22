@@ -1,0 +1,49 @@
+{% block page_title %}
+    Edit Student | Username: {{ username }} | #ID : {{ id }}
+{% endblock page_title %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hod Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'script.js' %}" type="text/javascript"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="/">
+                <div class="logo">
+                    <i class="fa-solid fa-user-tie"></i>
+                    HODAccount
+                </div>
+            </a>
+        </div>
+
+        {% include '../headerUser.html' %}
+
+    </header>
+
+    <div id="main">
+
+        {% include './navigation.html' %}
+
+
+        <div class="form hamburger">
+            <h2>Edit Student</h2>
+             {% comment %} Displaying the Django Form using forms.py EditStudentForm {% endcomment %}
+             {% url 'edit_student_save' as action_path %}
+             {% include 'Hod Page/form_template.html' with  form=form action_path=action_path button_text="Update Student" %} 
+    </div>
+
+</body>
+
+</html>

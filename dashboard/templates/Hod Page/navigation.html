@@ -6,7 +6,12 @@
                 <i class="fa fa-home"></i> Home
             </li>
         </a>
-        <a href="#">
+        <a href="{% url 'add_student'%}">
+            <li>
+                <i class="fa fa-user"></i> Add Student
+            </li>
+        </a>
+        <a href="{% url 'manage_student'%}">
             <li>
                 <i class="fa fa-user"></i> Manage Student
             </li>
@@ -35,13 +40,13 @@
                Manage Session
             </li>
         </a>
-        <a href="#">
+        <a href="{% url 'add_subject'%}">
             <li>
                 <i class="fa-solid fa-book-medical"></i>
                 Add Subject
             </li>
         </a>
-        <a href="#">
+        <a href="{% url 'manage_subject'%}">
             <li>
                 <i class="fa-solid fa-book-bookmark"></i>
                 Manage Subject
