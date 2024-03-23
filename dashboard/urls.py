@@ -15,6 +15,9 @@ urlpatterns = [
     path('add_staff_save/', HodViews.add_staff_save, name="add_staff_save"),
     path('add_staff/', HodViews.add_staff, name="add_staff"),
     path('student_home/', StudentViews.student_home, name="student_home"),
+    path('student_profile/', StudentViews.student_profile, name="student_profile"),
+     path('student_notes/', StudentViews.student_notes, name="student_notes"), 
+    path('student_profile_update/', StudentViews.student_profile_update, name="student_profile_update"), 
     
     path('manage_staff/', HodViews.manage_staff, name="manage_staff"),
     path('manage_staff/', HodViews.manage_staff, name="manage_staff"), 
@@ -49,6 +52,8 @@ urlpatterns = [
     path('delete_subject/<subject_id>/', HodViews.delete_subject, name="delete_subject"), 
     #faculty urls
     path('staff_home/', StaffViews.staff_home, name="staff_home"), 
+    path('staff_profile/', StaffViews.staff_profile, name="staff_profile"), 
+    path('staff_profile_update/', StaffViews.staff_profile_update, name="staff_profile_update"), 
     
      
 ]
