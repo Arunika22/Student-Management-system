@@ -51,9 +51,10 @@ urlpatterns = [
     path('edit_subject_save/', HodViews.edit_subject_save, name="edit_subject_save"), 
     path('delete_subject/<subject_id>/', HodViews.delete_subject, name="delete_subject"), 
     #faculty urls
-    path('staff_home/', StaffViews.staff_home, name="staff_home"), 
+    path('staff_home/', StaffViews.staff_home, name="staff_home"),
+     path('staff_notes/', StaffViews.staff_notes, name="staff_notes"), 
     path('staff_profile/', StaffViews.staff_profile, name="staff_profile"), 
     path('staff_profile_update/', StaffViews.staff_profile_update, name="staff_profile_update"), 
-    
+    path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"), 
      
 ]

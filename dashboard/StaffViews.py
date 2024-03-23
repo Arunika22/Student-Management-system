@@ -13,6 +13,8 @@ from .models import CustomUser, Staffs, Courses, Subjects, Students, SessionYear
 
 def staff_home(request):
     return render(request,'faculty page/faculty_home.html')
+def staff_notes(request):
+    return render(request,'faculty page/notes.html')
 
 def staff_profile(request): 
     user = CustomUser.objects.get(id=request.user.id) 
@@ -22,7 +24,7 @@ def staff_profile(request):
         "user": user, 
         "staff": staff 
     } 
-    return render(request, 'faculty page/staff_profile.html', context) 
+    return render(request, 'faculty page/profile.html', context) 
   
   
 def staff_profile_update(request): 
@@ -52,4 +54,13 @@ def staff_profile_update(request):
         except: 
             messages.error(request, "Failed to Update Profile") 
             return redirect('staff_profile') 
+
+def staff_take_attendance(request): 
+    subjects = Subjects.objects.filter(staff_id=request.user.id) 
+    session_years = SessionYearModel.objects.all() 
+    context = { 
+        "subjects": subjects, 
+        "session_years": session_years 
+    } 
+    return render(request, "faculty page/attendance.html", context) 
   
