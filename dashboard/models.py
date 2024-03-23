@@ -77,7 +77,7 @@ class Students(models.Model):
 	gender = models.CharField(max_length=50)
 	profile_pic = models.FileField()
 	address = models.TextField()
-	course_id = models.ForeignKey(Courses, on_delete=models.DO_NOTHING, default=1)
+	course_id = models.ForeignKey(Courses, on_delete=models.DO_NOTHING, default=4)
 	session_year_id = models.ForeignKey(SessionYearModel, null=True,
 										on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True)
@@ -196,7 +196,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 			Staffs.objects.create(admin=instance)
 		if instance.user_type == 3:
 			Students.objects.create(admin=instance,
-									course_id=Courses.objects.get(id=1),
+									course_id=Courses.objects.get(id=4),
 									session_year_id=SessionYearModel.objects.get(id=1),
 									address="",
 									profile_pic="",

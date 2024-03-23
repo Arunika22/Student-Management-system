@@ -1,127 +1,214 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>Hod Page</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            rel="stylesheet"
+            href="{% static 'style.css' %}"
+        />
+        <script
+            src="{% static 'script.js' %}"
+            type="text/javascript"
+        ></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hod Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <script type="text/javascript" src="../assets/js/script.js"></script>
-</head>
-
-<body>
-    <header>
-        <div>
-            <a href="/">
-                <div class="logo">
-                    <i class="fa-solid fa-user-tie"></i>
-                    HODAccount
-                </div>
-            </a>
-        </div>
-
-        {% include '../headerUser.html' %}
-
-    </header>
-
-    <div id="main">
-
-        {% include './navigation.html' %}
-
-        <div id="student_record">
-            <div class="page-title">
-                <h2>Manage Subject Details</h2>
-
-
-                <dialog class="form" id="edit_dialog">
-                    <div class="close" onclick="closeEditDialog()">&times;</div>
-                    <!-- <div className="form"> -->
-                    <div class="form">
-                        <h2>Edit Subject Detail</h2>
-                        <form onSubmit="return redirectToHome()" autoComplete="off">
-                            <input type="hidden" name="id" value={formResponse?.id} />
-                            <div class="form-field">
-                                <label for="subject_name">Subject Name</label>
-                                <input type="text" name="subject_name" id="subject_name"
-                                    placeholder="Enter Subject Name" required />
-                            </div>
-                            <div class="form-field">
-                                <label for="course">Course</label>
-                                <select name="course" id="course" required>
-                                    <option disabled selected>
-                                        -- Choose --
-                                    </option>
-                                    <option value="B.tech">
-                                        B.tech
-                                    </option>
-                                    <option value="M.tech">
-                                        M.tech
-                                    </option>
-
-                                </select>
-                            </div>
-                            <div class="form-field">
-                                <label for="faculty_name">Faculty Name</label>
-                                <input type="text" name="faculty_name" id="faculty_name" placeholder="Enter Full Name"
-                                    required />
-                            </div>
-
-
-                            <div class="form-field">
-                                <button type="submit"><a href="Hod_home.html"></a>Save</button>
-                            </div>
-                        </form>
+    <body>
+        <header>
+            <div>
+                <a href="/">
+                    <div class="logo">
+                        <i class="fa-solid fa-user-tie"></i>
+                        HODAccount
                     </div>
-                </dialog>
+                </a>
             </div>
 
-            <div id="search-bar">
-                <form action="" method="GET">
-                    <input type="search" name="search" id="search" placeholder="Search..." />
-                    <button type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-            </div>
+            {% include '../headerUser.html' %}
+        </header>
 
-            <div id="expese-record" class="record">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Subject Name</th>
-                            <th>Course</th>
-                            <th>Faculty Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
+        <div id="main">
+            {% include './navigation.html' %}
 
-                    <tbody>
-                        <tr>
-                            <td>DBMS</td>
-                            <td>B.tech</td>
-                            <td>Prof. Madhavi Soni</td>
-                            <td>
-                                <div class="action">
-                                    <button class="btn edit" onclick="openEditDialog()">Edit</button>
-                                    <button class="btn delete">Delete</button>
+            <div id="student_record">
+                <div class="page-title">
+                    <h2>Manage Subject Details</h2>
+
+                    <dialog class="form" id="edit_dialog">
+                        <div
+                            class="close"
+                            onclick="closeEditDialog()"
+                        >
+                            &times;
+                        </div>
+                        <!-- <div className="form"> -->
+                        <div class="form">
+                            <h2>Edit Subject Detail</h2>
+                            <form
+                                onSubmit="return redirectToHome()"
+                                autocomplete="off"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="{formResponse?.id}"
+                                />
+                                <div class="form-field">
+                                    <label
+                                        for="subject_name"
+                                        >Subject Name</label
+                                    >
+                                    <input
+                                        type="text"
+                                        name="subject_name"
+                                        id="subject_name"
+                                        placeholder="Enter Subject Name"
+                                        required
+                                    />
                                 </div>
-                            </td>
-                        </tr>
+                                <div class="form-field">
+                                    <label for="course"
+                                        >Course</label
+                                    >
+                                    <select
+                                        name="course"
+                                        id="course"
+                                        required
+                                    >
+                                        <option
+                                            disabled
+                                            selected
+                                        >
+                                            -- Choose --
+                                        </option>
+                                        <option
+                                            value="B.tech"
+                                        >
+                                            B.tech
+                                        </option>
+                                        <option
+                                            value="M.tech"
+                                        >
+                                            M.tech
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label
+                                        for="faculty_name"
+                                        >Faculty Name</label
+                                    >
+                                    <input
+                                        type="text"
+                                        name="faculty_name"
+                                        id="faculty_name"
+                                        placeholder="Enter Full Name"
+                                        required
+                                    />
+                                </div>
 
-                        <!-- <tr>
+                                <div class="form-field">
+                                    <button type="submit">
+                                        <a
+                                            href="Hod_home.html"
+                                        ></a
+                                        >Save
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </dialog>
+                </div>
+
+                
+                <div id="search-bar">
+                    <form action="" method="GET" class="search-form" data-search-record="#subject-data">
+                        <input type="search" name="search" id="search" placeholder="Search..." />
+                        <button type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <div id="expese-record" class="record">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Subject Name</th>
+                                <th>Course</th>
+                                <th>Staff</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="subject-data" >
+                            {% for subject in subjects %}
+                            <tr>
+                                <td>{{ subject.id }}</td>
+                                <td>
+                                    {{ subject.subject_name }}
+                                </td>
+                                <td>
+                                    {{ subject.course_id.course_name }}
+                                </td>
+                                <td>
+                                    {{ subject.staff_id.first_name }}
+                                    {{ subject.staff_id.last_name }}
+                                </td>
+                                <td>
+                                    {{ subject.created_at }}
+                                </td>
+                                <td>
+                                    {{ subject.updated_at }}
+                                </td>
+                                <td>
+                                    <div class="action">
+                                        <a
+                                            href="{% url 'edit_subject' subject.id %}"
+                                        >
+                                            <button
+                                                class="btn edit"
+                                            >
+                                                Edit
+                                            </button>
+                                        </a>
+                                        <a
+                                            href="{% url 'delete_subject' subject.id %}"
+                                        >
+                                            <button
+                                                class="btn delete"
+                                            >
+                                                Delete
+                                            </button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            <!-- <tr>
                                 <td colspan="6">No Student Detail Available</td>
                             </tr> -->
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-
-
         </div>
-    </div>
-</body>
-
+    </body>
 </html>
+ 

@@ -7,24 +7,25 @@ class DateInput(forms.DateInput):
 
 
 class AddStudentForm(forms.Form):
-	email = forms.EmailField(label="Email",
-							max_length=50,
-							widget=forms.EmailInput(attrs={"class":"form-control"}))
-	password = forms.CharField(label="Password",
-							max_length=50,
-							widget=forms.PasswordInput(attrs={"class":"form-control"}))
 	first_name = forms.CharField(label="First Name",
 								max_length=50,
-								widget=forms.TextInput(attrs={"class":"form-control"}))
+								widget=forms.TextInput(attrs={"class":"form-control", "placeholder" : "Enter First Name"}))
 	last_name = forms.CharField(label="Last Name",
 								max_length=50,
-								widget=forms.TextInput(attrs={"class":"form-control"}))
+								widget=forms.TextInput(attrs={"class":"form-control", "placeholder" : "Enter Last Name"}))
+	email = forms.EmailField(label="Email",
+							max_length=50,
+							widget=forms.EmailInput(attrs={"class":"form-control", "placeholder" : "Enter Email Address"}))
 	username = forms.CharField(label="Username",
 							max_length=50,
-							widget=forms.TextInput(attrs={"class":"form-control"}))
+							widget=forms.TextInput(attrs={"class":"form-control", "placeholder" : "Enter Username"}))
+	password = forms.CharField(label="Password",
+							max_length=50,
+							widget=forms.PasswordInput(attrs={"class":"form-control", "placeholder" : "Enter Password"}))
+
 	address = forms.CharField(label="Address",
 							max_length=50,
-							widget=forms.TextInput(attrs={"class":"form-control"}))
+							widget=forms.TextInput(attrs={"class":"form-control", "placeholder" : "Enter Address"}))
 
 	#For Displaying Courses
 	try:

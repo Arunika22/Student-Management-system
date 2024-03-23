@@ -20,8 +20,8 @@ def loginUser(request):
 def doLogin(request):
 	print("hello")
 	print("here")
-	email_id = request.GET.get('email')
-	password = request.GET.get('password')
+	email_id = request.POST.get('email')
+	password = request.POST.get('password')
 	# user_type = request.GET.get('user_type')
 	print(email_id)
 	print(password)
