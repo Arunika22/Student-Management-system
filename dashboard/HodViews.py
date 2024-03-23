@@ -347,7 +347,7 @@ def add_student_save(request):
                 messages.success(request, "Student Added Successfully!")
                 return redirect('add_student') 
             except :
-                messages.error(request, "Failed to Add Student: {}")
+                # messages.error(request, "Failed to Add Student: {}")
                 return redirect('add_student') 
                 # messages.error(request, "Failed to Add Student!") 
                 # return redirect('add_student') 
