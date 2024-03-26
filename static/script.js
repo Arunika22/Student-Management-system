@@ -17,6 +17,7 @@ function closeAddDialog() {
 }
 
 function openEditDialog() {
+    
     document.querySelector('#edit_dialog')?.showModal();
     //new code
     

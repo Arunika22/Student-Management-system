@@ -11,6 +11,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="{% static 'style.css' %}">
         <script type="text/javascript" src="{% static 'script.js' %}"></script>
+        
+        
 
 <body>
     <header>
@@ -103,31 +105,57 @@
                                 </form>
                                 <!-- </div> -->
                 </dialog>
-
-                <dialog class="form" id="edit_dialog">
+                {% for note in uploaded_notes %}
+                <dialog class="form" id="edit_dialog_{{ note.id }}">
                     <div class="close" onclick="closeEditDialog()">&times;</div>
+                    {{ note.id }}
+                    {% if note.id %}
+
                     <!-- <div className="form"> -->
-                    <form onSubmit={handleSubmit}>
-                        <input type="hidden" name="id" value={formResponse?.id} />
+                    <form method="post"enctype="multipart/form-data" action="{% url 'edit_notes' note.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="subject_id" value="{{ note.subject_id.id }}">
+    
                         <div class="row">
                             <h3>Edit Notes</h3>
                         </div>
+                        
                         <div class="form-field">
-                            <label for="text">Notes Title</label>
-                            <input type="text" name="text" id="text" placeholder="Enter title" required />
+                            <label for="course_id">Course</label>
+                            <select name="course_id" id="course_id" required>
+                                {% for course in courses %}
+                                    <option value="{{ course.id }}">{{ course.course_name }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
-
+                    
                         <div class="form-field">
-                            <label for="file">Files</label>
-                            <input type="file" name="file"id = "file" required />
+                            <label for="session_year_id">Session</label>
+                            <select name="session_year_id" id="session_year_id" required>
+                                {% for session in sessions %}
+                                    <option value="{{ session.id }}">{{ session.session_start_year}}-{{ session.session_end_year}}</option>
+                                {% endfor %}
+                            </select>
                         </div>
-
+                    
+                        <div class="form-field">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" placeholder="Enter description" required></textarea>
+                        </div>
+                    
+                        <div class="form-field">
+                            <label for="document">Files</label>
+                            <input type="file" name="document" id="document" required />
+                        </div>
+                    
                         <div class="form-field">
                             <button type="submit">Upload</button>
                         </div>
                     </form>
+                    {% endif %}
                     <!-- </div> -->
                 </dialog>
+                {% endfor %}
             </div>
 
             <div id="faculty-record" class="record">
@@ -150,11 +178,18 @@
                             <td>
                                 <div class="actions">
                                     <a href="{{ note.document.url }}" download>Download</a>
-                                    <button class="edit btn" onclick="openEditDialog()">
-                                        Edit
+                                    <button class="edit btn" onclick="openEditDialog('{{ note.id }}')">
+
+
+                                        
+                                        {% comment %} <a href="{% url 'edit_notes' note.id %}"> {% endcomment %}
+                                        Edit(Note ID: {{ note.id }})
+                                        {% comment %} </a> {% endcomment %}
                                     </button>
                                     <button class="delete btn">
+                                        <a href="{% url 'delete_notes' note.id %}" >
                                         Delete
+                                        </a>
                                     </button>
                                 </div>
                             </td>
@@ -168,3 +203,17 @@
 </body>
 
 </html>
+<script>
+    // Define a global variable to store the note ID
+   
+
+    // Define the openEditDialog function without parameters
+    function openEditDialog(noteId) {
+        var editDialog = document.querySelector('#edit_dialog_' + noteId);
+        editDialog?.showModal();
+    }
+    function closeEditDialog() {
+        var editDialog = document.querySelector('.form[open]');
+        editDialog?.close();
+    }
+</script>

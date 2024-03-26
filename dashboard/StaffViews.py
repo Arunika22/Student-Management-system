@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse 
 from django.contrib import messages 
@@ -26,12 +26,14 @@ def staff_notes(request):
        
         
     courses = Courses.objects.all() 
+    
     context = { 
             "subjects": subjects, 
             "sessions": sessions,
             
             "courses" : courses,
             "uploaded_notes": uploaded_notes
+           
         } 
     return render(request,'faculty page/notes.html',context)
 
@@ -83,31 +85,6 @@ def staff_take_attendance(request):
     } 
     return render(request, "faculty page/attendance.html", context)
  
-# def upload_notes(request):
-    
-#     staff = Staffs.objects.get(admin=request.user.id) 
-#     sessions = SessionYearModel.objects.all() # Assuming the user is a staff member
-#     subjects = Subjects.objects.filter(staff_id=request.user.id) 
-#     courses = Courses.objects.all() 
-#     print(sessions)
-#     print(subjects)
-#     if request.method == 'POST':
-#         form = NotesForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.instance.uploaded_by = staff
-#   # Assuming the user is a staff member
-#             form.save()
-#             return redirect('upload_notes')  # Redirect to a page showing all uploaded notes
-#     else:
-#             form = NotesForm()
-#  # Filter subjects by current user (staff)
-#     context = { 
-#         "subjects": subjects, 
-#         "sessions": sessions,
-#         "form" : form,
-#         "courses" : courses
-#     } 
-#     return render(request, 'faculty page/notes.html',context)
 def upload_notes(request):
     print("Inside upload_notes view function")  # Debugging statement
     
@@ -132,7 +109,7 @@ def upload_notes(request):
                 form.instance.uploaded_by = staff
                 form.save()
                 print("Form saved successfully")  # Debugging statement
-                return redirect('upload_notes')  # Redirect to the same page after form submission
+                return redirect('staff_notes')  # Redirect to the same page after form submission
             else:
                 print("Form is not valid") 
                 print("Form errors:", form.errors)  # D # Debugging statement
@@ -151,3 +128,36 @@ def upload_notes(request):
     except Exception as e:
         print("Error:", e)  # Debugging statement
         return HttpResponse("An error occurred. Please try again later.")
+
+def delete_notes(request, note_id):
+    note = get_object_or_404(Notes, id=note_id)
+    note.delete()
+    return redirect('staff_notes')  # Redirect to the notes list page
+
+def edit_notes(request, note_id):
+    note = get_object_or_404(Notes, id=note_id)
+    note_subject = note.subject_id.subject_name
+    print(note_subject)
+    if request.method == 'POST':
+      
+        form = NotesForm(request.POST, request.FILES, instance=note)
+        if form.is_valid():
+            print("valid form")
+            
+            form.save()
+            print("form saved")
+            return redirect('staff_notes') 
+        else :
+
+            print("invalid form")
+            print("Form errors:", form.errors)
+        # Redirect to the notes list page
+    else:
+        form = NotesForm(instance=note)
+    
+    context = {
+        'form': form,
+        'note': note,
+        'note_subject': note_subject
+    }
+    return render(request, 'faculty page/notes.html', context)

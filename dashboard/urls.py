@@ -59,6 +59,8 @@ urlpatterns = [
     path('staff_profile_update/', StaffViews.staff_profile_update, name="staff_profile_update"), 
     path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"),
     path('upload_notes/', StaffViews.upload_notes, name="upload_notes"),
+    path('edit_notes/<int:note_id>/', StaffViews.edit_notes, name='edit_notes'),
+    path('delete_notes/<int:note_id>/', StaffViews.delete_notes, name='delete_notes'),
    
      
 ]
