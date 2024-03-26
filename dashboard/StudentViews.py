@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.core.files.storage import FileSystemStorage 
 from django.urls import reverse 
 import datetime 
-from .models import CustomUser, Staffs, Courses, Subjects, Students, Attendance, AttendanceReport, LeaveReportStudent, FeedBackStudent, StudentResult 
+from .models import CustomUser, Staffs, Courses, Subjects, Students, Attendance, AttendanceReport, LeaveReportStudent, FeedBackStudent, StudentResult,Notes
 def student_home(request):
     return render(request,'student page/student_home.html')
 def student_profile(request): 
@@ -47,4 +47,8 @@ def student_profile_update(request):
             messages.error(request, "Failed to Update Profile") 
             return redirect('student_profile') 
 def student_notes(request):
-    return render(request,'student page/notes.html')
+    notes = Notes.objects.all()
+    context = {
+        "notes": notes
+    }
+    return render(request,'student page/notes.html',context)

@@ -42,33 +42,32 @@
                         </button>
                     </form>
                 </div>
-
+                {% for file in notes %}
                 <div class="note">
                     <div class="detail">
                         <div class="image">
                             <i class="fa-regular fa-file-lines"></i>
                         </div>
+                        
                         <div class="info">
                             <div class="note-title">
-                                <span>Database Management
-                                    System</span><span>Books</span>
+                                <span>{{file.subject_id.subject_name}}</span><span>Books</span>
                             </div>
                             <div class="extra-info">
                                 <span>♥3</span>
-                                <span>Wireless
-                                    Technology</span>
-                                <span>Book</span>
+                                <span>{{file.description}}</span>
+
                                 <span>pdf</span>
                             </div>
-                            <div class="upload-info">
-                                <span>Padhai Likhai</span>
-                                <span>May 7, 2023,
-                                    09:17am</span>
-                                <span class="report">Report</span>
+                            <div class="upload-info"> 
+                                <span>{{file.uploaded_by.admin.first_name}} {{file.uploaded_by.admin.last_name}}</span>
+                                <span>{{file.uploaded_date}}</span>
+                                {% comment %} <span class="report">Report</span> {% endcomment %}
                             </div>
                             <div class="category">
-                                <span>sem 6 IT, CSE</span>
+                                <span>{{file.course_id.course_name}}</span>
                             </div>
+                           
                         </div>
                     </div>
 
@@ -77,86 +76,16 @@
                             <i class="fa fa-heart"></i>
                         </button>
                         <button class="download btn">
-                            <i class="fa fa-download"></i>
+                            <a href="{{ file.document.url }}" download>
+                            <i class="fa fa-download"> download</i>
+                        </a>
                         </button>
                     </div>
+                   
                 </div>
-                <div class="note">
-                    <div class="detail">
-                        <div class="image">
-                            <i class="fa-regular fa-file-lines"></i>
-                        </div>
-                        <div class="info">
-                            <div class="note-title">
-                                <span>Operating
-                                    System</span><span>Books</span>
-                            </div>
-                            <div class="extra-info">
-                                <span>♥3</span>
-                                <span>Wireless
-                                    Technology</span>
-                                <span>Sample Paper</span>
-                                <span>pdf</span>
-                            </div>
-                            <div class="upload-info">
-                                <span>Padhai Likhai</span>
-                                <span>May 7, 2023,
-                                    09:17am</span>
-                                <span class="report">Report</span>
-                            </div>
-                            <div class="category">
-                                <span>sem 6 IT, CSE</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="actions">
-                        <button class="like btn">
-                            <i class="fa fa-heart"></i>
-                        </button>
-                        <button class="download btn">
-                            <i class="fa fa-download"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="note">
-                    <div class="detail">
-                        <div class="image">
-                            <i class="fa-regular fa-file-lines"></i>
-                        </div>
-                        <div class="info">
-                            <div class="note-title">
-                                <span>Computer
-                                    Network</span><span>Books</span>
-                            </div>
-                            <div class="extra-info">
-                                <span>♥3</span>
-                                <span>Wireless
-                                    Technology</span>
-                                <span>Book</span>
-                                <span>pdf</span>
-                            </div>
-                            <div class="upload-info">
-                                <span>Padhai Likhai</span>
-                                <span>May 7, 2023,
-                                    09:17am</span>
-                                <span class="report">Report</span>
-                            </div>
-                            <div class="category">
-                                <span>sem 6 IT, CSE</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="actions">
-                        <button class="like btn">
-                            <i class="fa fa-heart"></i>
-                        </button>
-                        <button class="download btn">
-                            <i class="fa fa-download"></i>
-                        </button>
-                    </div>
-                </div>
+                {% endfor %}
+                
+                
             </div>
         </div>
     </div>
