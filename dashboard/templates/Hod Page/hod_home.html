@@ -34,7 +34,7 @@
         {% include './navigation.html' %}
 
 
-        <div class="form hamburger">
+        {% comment %} <div class="form hamburger">
             <h2>Add Student</h2>
             <form action="">
                 <div class="form-field">
@@ -84,7 +84,43 @@
                     <button type="submit">Add Student</button>
                 </div>
             </form>
-        </div>
+        </div> {% endcomment %}
+        <section id="main_section" class="content">
+            <div id="hod_short_detail">
+                <h3>Quick Information</h3>
+                <div class="row">
+
+                    <div class="small-box bg-info">
+                        <a href="{% url 'manage_student' %}">
+                            <h3>12</h3>
+                            <p>Total Students</p>
+                        </a>
+                    </div>
+
+                    <div class="small-box bg-danger">
+                        <a href="{% url 'manage_staff' %}">
+                            <h3>17</h3>
+                            <p>Total Staffs</p>
+                        </a>
+                    </div>
+
+                    <div class="small-box bg-warning">
+                        <a href="{% url 'manage_course' %}">
+                            <h3>4</h3>
+                            <p>Total Courses</p>
+                        </a>
+                    </div>
+
+                    <div class="small-box bg-success">
+                        <a href="{% url 'manage_subject' %}">
+                            <h3>22</h3>
+                            <p>Total Subjects</p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </div>
 
 </body>

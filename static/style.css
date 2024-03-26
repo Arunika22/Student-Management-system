@@ -630,3 +630,66 @@ table tr .absent::after {
     box-sizing: border-box;
     border-radius: 0 5px 5px 5px;
 }
+#hod_short_detail {
+    background: #efefef;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
+    #hod_short_detail h3{
+        text-align: center;
+        font-size: 25px;
+        margin: 10px 0;
+        color: #262626;
+    }
+#hod_short_detail .row{
+    gap:20px;
+    padding: 10px;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+}
+#hod_short_detail .small-box {
+    flex: 1 1 300px;
+    background:#efefef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#hod_short_detail .small-box a {
+    display: block;
+    padding: 10px;
+    box-sizing: border-box;
+}
+#hod_short_detail .small-box h3 {
+    font-size: 38px;
+    margin: 10px 0;
+    color: #fff;
+    text-align: center;
+}
+#hod_short_detail .small-box p {
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+}
+#hod_short_detail .small-box.bg-info a
+ {
+    background: rgb(50, 160, 250);
+    color: #fff;
+}
+#hod_short_detail .small-box.bg-danger a
+ {
+    color: #fff;
+    background: #ff6a6a;
+}
+
+#hod_short_detail .small-box.bg-warning a
+ {
+    color: #fff;
+    background: rgb(255, 197, 36);
+}
+
+#hod_short_detail .small-box.bg-success a
+ {
+    color: #fff;
+    background: #26ff4a;
+}
