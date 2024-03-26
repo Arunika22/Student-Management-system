@@ -36,45 +36,72 @@
                 <div class="row" id="attendance_list">
                     <h2>Notes List</h2>
 
-                    <select onchange="changeClass(event)">
-                        <option>CS2110</option>
-                        <option>IT2110</option>
-                        <option>EC2310</option>
-                        <option>EC2210</option>
-                        <option>EC2110</option>
-                        <option>EC2010</option>
-                    </select>
+                    
                 </div>
 
                 <div class=" row" id="attendance_action">
                     <div onclick="openAddDialog()">Upload New Notes</div>
                 </div>
 
-
+                
 
                 <dialog class="form" id="add_dialog">
                     <div class="close" onclick="closeAddDialog()">&times;</div>
                     <!-- <div className="form"> -->
-                    <form onSubmit={handleSubmit}>
-                        <input type="hidden" name="id" value={formResponse?.id} />
+                    <form method="post"enctype="multipart/form-data" action="{% url 'upload_notes' %}">
+                        {% comment %}  {% endcomment %}
+                        {% csrf_token %}
+                         {% comment %} {{ form.as_p }} {% endcomment %}
+                         {% comment %} <p>Form action: {% url 'upload_notes' %}</p> {% endcomment %}
+                       
                         <div class="row">
                             <h3>Upload Notes</h3>
                         </div>
-                        <div class="form-field">
-                            <label for="text">Notes Title</label>
-                            <input type="text" name="text" id="text" placeholder="Enter title" required />
-                        </div>
+                                
+                    
+                    <div class="form-field">
+                        <label for="subject_id">Subject</label>
+                        <select name="subject_id" id="subject_id">
+                            {% for subject in subjects %}
+                            
+                            <option value="{{ subject.id }}">{{ subject.subject_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="course_id">Course</label>
+                        <select name="course_id" id="course_id" required>
+                            {% for course in courses %}
+                            <option value="{{ course.id }}">{{ course.course_name }}</option>
+                            {% endfor %}
+    
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="session_year_id">Session</label>
+                        <select name="session_year_id" id="session_year_id">
+                            {% for session in sessions %}
+                            <option value="{{ session.id }}">{{ session.session_start_year}}-{{ session.session_end_year}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-                        <div class="form-field">
-                            <label for="file">Files</label>
-                            <input type="file" name="file" required />
-                        </div>
+                    <div class="form-field">
+                        <label for="document">Document</label>
+                        <input type="file" name="document" id="document" required />
+                    </div>
 
-                        <div class="form-field">
-                            <button type="submit">Upload</button>
-                        </div>
-                    </form>
-                    <!-- </div> -->
+                    <div class="form-field">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" placeholder="Enter description" required></textarea>
+                    </div>
+
+                    <div class="form-field">
+                        <button type="submit">Upload</button>
+                                    </div>
+                                </form>
+                                <!-- </div> -->
                 </dialog>
 
                 <dialog class="form" id="edit_dialog">
@@ -92,7 +119,7 @@
 
                         <div class="form-field">
                             <label for="file">Files</label>
-                            <input type="file" name="file" required />
+                            <input type="file" name="file"id = "file" required />
                         </div>
 
                         <div class="form-field">
@@ -115,12 +142,14 @@
                     </thead>
 
                     <tbody>
+                        {% for note in uploaded_notes %}
                         <tr>
-                            <td>1</td>
-                            <td>DBMS Notes</td>
-                            <td>March 5, 2023 09:15pm</td>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ note.subject_id.subject_name }} </td>
+                            <td>{{ note.upload_date }}</td>
                             <td>
                                 <div class="actions">
+                                    <a href="{{ note.document.url }}" download>Download</a>
                                     <button class="edit btn" onclick="openEditDialog()">
                                         Edit
                                     </button>
@@ -130,6 +159,7 @@
                                 </div>
                             </td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

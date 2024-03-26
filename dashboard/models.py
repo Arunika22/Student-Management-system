@@ -179,6 +179,16 @@ class StudentResult(models.Model):
 	updated_at = models.DateTimeField(auto_now=True)
 	objects = models.Manager()
 
+class Notes(models.Model):
+    id = models.AutoField(primary_key=True)
+    subject_id = models.ForeignKey(Subjects, on_delete=models.CASCADE)
+    course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    session_year_id = models.ForeignKey(SessionYearModel, on_delete=models.CASCADE)
+    uploaded_by = models.ForeignKey(Staffs, on_delete=models.CASCADE)
+    upload_date = models.DateTimeField(auto_now_add=True)
+    document = models.FileField(upload_to='notes/')
+    description = models.TextField()
+    objects = models.Manager()
 
 #Creating Django Signals
 @receiver(post_save, sender=CustomUser)

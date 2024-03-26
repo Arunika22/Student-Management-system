@@ -7,9 +7,10 @@ function changeClass(e) {
     window.location.href = url.toString();
 }
 
-// function openAddDialog() {
-//     document.querySelector('#add_dialog')?.showModal();
-// }
+function openAddDialog() {
+    console.log("Opening add dialog"); // Debug statement
+    document.querySelector('#add_dialog')?.showModal();
+}
 
 function closeAddDialog() {
     document.querySelector('#add_dialog')?.close();

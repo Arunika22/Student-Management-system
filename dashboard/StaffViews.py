@@ -7,14 +7,33 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt 
 from django.core import serializers 
 import json 
+from .forms import NotesForm
+
+
   
   
-from .models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, Attendance, AttendanceReport, LeaveReportStaff, FeedBackStaffs, StudentResult 
+from .models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, Attendance, AttendanceReport, LeaveReportStaff, FeedBackStaffs, StudentResult,Notes
 
 def staff_home(request):
     return render(request,'faculty page/faculty_home.html')
 def staff_notes(request):
-    return render(request,'faculty page/notes.html')
+    staff = Staffs.objects.get(admin=request.user.id) 
+    uploaded_notes = Notes.objects.filter(uploaded_by=request.user.staffs)
+    sessions = SessionYearModel.objects.all()
+        
+        
+    subjects = Subjects.objects.filter(staff_id=request.user.id) 
+       
+        
+    courses = Courses.objects.all() 
+    context = { 
+            "subjects": subjects, 
+            "sessions": sessions,
+            
+            "courses" : courses,
+            "uploaded_notes": uploaded_notes
+        } 
+    return render(request,'faculty page/notes.html',context)
 
 def staff_profile(request): 
     user = CustomUser.objects.get(id=request.user.id) 
@@ -62,5 +81,73 @@ def staff_take_attendance(request):
         "subjects": subjects, 
         "session_years": session_years 
     } 
-    return render(request, "faculty page/attendance.html", context) 
-  
+    return render(request, "faculty page/attendance.html", context)
+ 
+# def upload_notes(request):
+    
+#     staff = Staffs.objects.get(admin=request.user.id) 
+#     sessions = SessionYearModel.objects.all() # Assuming the user is a staff member
+#     subjects = Subjects.objects.filter(staff_id=request.user.id) 
+#     courses = Courses.objects.all() 
+#     print(sessions)
+#     print(subjects)
+#     if request.method == 'POST':
+#         form = NotesForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.instance.uploaded_by = staff
+#   # Assuming the user is a staff member
+#             form.save()
+#             return redirect('upload_notes')  # Redirect to a page showing all uploaded notes
+#     else:
+#             form = NotesForm()
+#  # Filter subjects by current user (staff)
+#     context = { 
+#         "subjects": subjects, 
+#         "sessions": sessions,
+#         "form" : form,
+#         "courses" : courses
+#     } 
+#     return render(request, 'faculty page/notes.html',context)
+def upload_notes(request):
+    print("Inside upload_notes view function")  # Debugging statement
+    
+    try:
+        staff = Staffs.objects.get(admin=request.user.id) 
+        print("Staff:", staff)  # Debugging statement
+        
+        sessions = SessionYearModel.objects.all()
+        print("Sessions:", sessions)  # Debugging statement
+        
+        subjects = Subjects.objects.filter(staff_id=request.user.id) 
+        print("Subjects:", subjects)  # Debugging statement
+        
+        courses = Courses.objects.all() 
+        print("Courses:", courses)  # Debugging statement
+        
+        if request.method == 'POST':
+            print("Request method is POST")  # Debugging statement
+            
+            form = NotesForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.instance.uploaded_by = staff
+                form.save()
+                print("Form saved successfully")  # Debugging statement
+                return redirect('upload_notes')  # Redirect to the same page after form submission
+            else:
+                print("Form is not valid") 
+                print("Form errors:", form.errors)  # D # Debugging statement
+        else:
+            print("Request method is not POST")  # Debugging statement
+            form = NotesForm()
+        
+        context = { 
+            "subjects": subjects, 
+            "sessions": sessions,
+            "form" : form,
+            "courses" : courses
+        } 
+        return render(request, 'faculty page/notes.html', context)
+    
+    except Exception as e:
+        print("Error:", e)  # Debugging statement
+        return HttpResponse("An error occurred. Please try again later.")

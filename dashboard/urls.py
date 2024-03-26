@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path,include
 from .import views
 from .import HodViews,StudentViews,StaffViews
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/',admin.site.urls),
     path('',views.home,name='home.html'),
@@ -55,6 +57,11 @@ urlpatterns = [
      path('staff_notes/', StaffViews.staff_notes, name="staff_notes"), 
     path('staff_profile/', StaffViews.staff_profile, name="staff_profile"), 
     path('staff_profile_update/', StaffViews.staff_profile_update, name="staff_profile_update"), 
-    path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"), 
+    path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"),
+    path('upload_notes/', StaffViews.upload_notes, name="upload_notes"),
+   
      
 ]
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

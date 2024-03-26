@@ -125,3 +125,13 @@ class EditStudentForm(forms.Form):
 	profile_pic = forms.FileField(label="Profile Pic",
 								required=False,
 								widget=forms.FileInput(attrs={"class":"form-control"}))
+
+# forms.py
+
+from django import forms
+from .models import Notes
+
+class NotesForm(forms.ModelForm):
+    class Meta:
+        model = Notes
+        fields =['subject_id', 'course_id', 'session_year_id', 'document', 'description']
