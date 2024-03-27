@@ -1,7 +1,9 @@
 CLASSROOM++ 
 
 1.Classroom++ offers a user-friendly interface with three distinct modules: Student, Faculty, and HOD (Head of Department), catering to the needs of each stakeholder in an educational institution.
+
 2.HOD privileges include the ability to add students and faculty, manage courses, subjects, and sessions, providing seamless administrative control and oversight.
+
 3.Faculty members can efficiently take attendance and upload course materials such as notes, while students can easily access attendance records and download relevant study materials, enhancing the overall learning experience.
 
 
