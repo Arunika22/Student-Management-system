@@ -29,12 +29,24 @@ a {
     text-decoration: none;
 }
 
+.error {
+    color: #666;
+    font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+}
+
+.btn-success {
+    background: var(--light-blue);
+    color: #fff;
+}
+
 #main {
     display: flex;
     height: calc(100vh - 60px);
 }
 
-#student_record {
+#student_record, #main_section { 
     max-width: calc(100% - 200px);
     flex: 1;
 }
@@ -405,12 +417,22 @@ header .user ul li a {
     margin: 10px 0;
 }
 
-#attendance_list select {
+#attendance_list input,
+#attendance_list select,
+#attendance_list button {
     height: 35px;
     border-radius: 5px;
     width: 100px;
+    border: 1px solid #999;
+    padding: 0 10px; 
+    box-sizing: border-box;
 }
 
+#attendance_list button {
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+}
 #attendance_action div {
     line-height: 35px;
     padding: 0 10px;
@@ -692,4 +714,29 @@ table tr .absent::after {
  {
     color: #fff;
     background: #26ff4a;
+}
+
+.attendance-date {
+    color: #f00;
+    text-align: center;
+    font-size: 18px;
+    width: 100%;
+    flex: 1 !important;
+    color: #444;
+    margin: 30px 0 10px;
+}
+
+@media print {
+    header, #navbar, dialog, .page-title {
+        display: none;
+    }
+    
+    #student_record, #main_section {
+        width: 100%;
+        max-width: 100%;
+    }
+    table th,
+    table td{
+        border: 1px solid #999;
+    }
 }

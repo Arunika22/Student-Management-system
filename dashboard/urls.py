@@ -54,13 +54,17 @@ urlpatterns = [
     path('delete_subject/<subject_id>/', HodViews.delete_subject, name="delete_subject"), 
     #faculty urls
     path('staff_home/', StaffViews.staff_home, name="staff_home"),
-     path('staff_notes/', StaffViews.staff_notes, name="staff_notes"), 
+    path('staff_notes/', StaffViews.staff_notes, name="staff_notes"), 
     path('staff_profile/', StaffViews.staff_profile, name="staff_profile"), 
     path('staff_profile_update/', StaffViews.staff_profile_update, name="staff_profile_update"), 
     path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"),
     path('upload_notes/', StaffViews.upload_notes, name="upload_notes"),
     path('edit_notes/<int:note_id>/', StaffViews.edit_notes, name='edit_notes'),
     path('delete_notes/<int:note_id>/', StaffViews.delete_notes, name='delete_notes'),
+
+    # attendance
+    path('add_attendace/', StaffViews.add_attendance, name="add_attendace"),
+    path('edit_attendace/', StaffViews.edit_attendance, name="edit_attendace")
    
      
 ]
