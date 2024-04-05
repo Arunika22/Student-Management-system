@@ -12,7 +12,17 @@ from .forms import AddStudentForm, EditStudentForm
 from .models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, FeedBackStudent, FeedBackStaffs, LeaveReportStudent, LeaveReportStaff, Attendance, AttendanceReport
  
 def hod_home(request):
-    return render(request,'Hod Page/hod_home.html')
+    subject = Subjects.objects.count()
+    staff = Staffs.objects.count()
+    student = Students.objects.count()
+    course = Courses.objects.count()
+    context ={
+        "subject" : subject,
+        "staff" : staff,
+        "student" : student,
+        "course" : course
+    }
+    return render(request,'Hod Page/hod_home.html',context)
 
 def add_staff(request) :
     return render(request,"Hod Page/add_staff.html")
