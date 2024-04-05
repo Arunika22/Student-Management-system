@@ -26,6 +26,7 @@ function closeAddAttendanceDialog() {
 }
 
 function printReport() {
+    console.log("Opening print dialog"); 
     window.print()
 }
 
