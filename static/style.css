@@ -34,7 +34,7 @@ a {
     height: calc(100vh - 60px);
 }
 
-#student_record {
+#student_record, #main_section {
     max-width: calc(100% - 200px);
     flex: 1;
 }
