@@ -20,6 +20,11 @@ urlpatterns = [
     path('student_profile/', StudentViews.student_profile, name="student_profile"),
      path('student_notes/', StudentViews.student_notes, name="student_notes"), 
     path('student_profile_update/', StudentViews.student_profile_update, name="student_profile_update"), 
+
+    path('student_view_attendance/', StudentViews.student_view_attendance, name="student_view_attendance"), 
+
+    path('student_view_attendance_post/', StudentViews.student_view_attendance_post, name="student_view_attendance_post"), 
+
     
     path('manage_staff/', HodViews.manage_staff, name="manage_staff"),
     path('manage_staff/', HodViews.manage_staff, name="manage_staff"), 

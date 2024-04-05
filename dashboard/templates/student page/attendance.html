@@ -1,3 +1,4 @@
+{%load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <script type="text/javascript" src="../assets/js/script.js"></script>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <script type="text/javascript" src="{% static 'script.js' %}"></script>
 </head>
 
 <body>
@@ -28,13 +29,13 @@
     </header>
 
     <div id="main">
-        {% include 'navigation.html' %}
+        {% include './navigation.html' %}
 
         <div id="student_record">
             <div class="page-title">
                 <h2>Attendance Report</h2>
             </div>
-            <div id="expese-record" class="record">
+            {% comment %} <div id="expese-record" class="record">
                 <table>
                     <thead>
                         <tr>
@@ -62,6 +63,41 @@
                         </tr>
                     </tbody>
                 </table>
+            </div> {% endcomment %}
+            <div class="form">
+                <form method="POST" action="{% url 'student_view_attendance_post' %}">
+                    {% csrf_token %}
+                     <select name="subject">
+                        <option value="" selected  disabled>Choose Subject</option>
+
+                        {% for subject in subjects %}
+                            <option value="{{subject.id}}" 
+                            {% if active_subject.id == subject.id %}
+                                selected
+                            {% endif %}
+                            >{{subject.subject_name}}</option>
+
+                        {% endfor %}
+                    </select>
+                    <div class="form-field"><label>Start date</label>
+                        <input type="date" class="form-control" name="start_date" required />
+                    </div>
+                    <div class="form-field"><label>End date</label>
+                        <input type="date"  name="end_date" required/>
+                        </div>
+
+
+                   
+                  
+            
+                    <div class="form-field">
+                        <button type="submit" id="fetch_student">Fetch Attendance</button>
+                    </div>
+
+                  
+
+                    
+                </form>
             </div>
         </div>
     </div>
