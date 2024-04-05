@@ -46,8 +46,7 @@ def staff_profile(request):
         "staff": staff 
     } 
     return render(request, 'faculty page/profile.html', context) 
-  
-  
+
 def staff_profile_update(request): 
     if request.method != "POST": 
         messages.error(request, "Invalid Method!") 
@@ -76,8 +75,77 @@ def staff_profile_update(request):
             messages.error(request, "Failed to Update Profile") 
             return redirect('staff_profile') 
 
+def staff_take_attendance(request): 
+    subjects = Subjects.objects.filter(staff_id=request.user.id) 
+    session_years = SessionYearModel.objects.all()
 
- 
+    session_id = request.GET.get('session')
+    subject_id = request.GET.get('subject')
+    date = request.GET.get('date')
+
+    contexts={
+        'subjects' : subjects,
+        "session_years" : session_years
+    }
+
+    if session_id and subject_id : 
+        session = SessionYearModel.objects.get(id=session_id)
+        subject = Subjects.objects.get(id=subject_id)
+        students = Students.objects.filter(course_id=subject.course_id,session_year_id=session.id)
+        attendance = Attendance.objects.filter(session_year_id=session.id,subject_id=subject.id, attendance_date=date).first()
+        
+        contexts['active_session'] = session
+        contexts['active_subject'] = subject
+        contexts['date'] = date
+        contexts['students'] = students
+        contexts['attendance'] = attendance
+        if attendance != None :
+            attendance_report = AttendanceReport.objects.filter(attendance_id=attendance.id)
+            contexts['attendace_report'] = attendance_report
+        
+
+    return render(request, "faculty page/attendance.html", contexts)
+
+def add_attendance(request):
+    subject_id = request.POST.get('subject_id')
+    session_id = request.POST.get('session_id')
+    attendance_date = request.POST.get('date')
+    students = request.POST.getlist('student[]')
+    attendanceStatus = request.POST.getlist('attendance[]')
+
+    subject = Subjects.objects.get(id=subject_id)
+    session_year = SessionYearModel.objects.get(id=session_id)
+
+    attendance = Attendance.objects.create(subject_id=subject,session_year_id=session_year,attendance_date=attendance_date)
+    for index in range(len(students)) : 
+        student = Students.objects.get(id=students[index])
+        status = attendanceStatus[index]
+
+        # storing individual attendance
+        AttendanceReport.objects.create(
+            student_id=student,
+            attendance_id=attendance,
+            status=(True if status=='true' else False)
+        )
+
+    return staff_take_attendance(request);
+
+def edit_attendance(request) :
+    if request.method != "POST": 
+        return HttpResponse("Invalid Method!") 
+    
+    attendance_id = request.POST.get('attendance_id')
+    record_ids = request.POST.getlist('record_id[]')
+    attendanceStatus = request.POST.getlist('attendance[]')
+
+    for index in range(len(record_ids)) : 
+        report = AttendanceReport.objects.get(id=record_ids[index])
+        report.status = True if attendanceStatus[index]=='true' else False
+
+        report.save()
+
+    return staff_take_attendance(request);
+
 def upload_notes(request):
     print("Inside upload_notes view function")  # Debugging statement
     

@@ -54,7 +54,7 @@ urlpatterns = [
     path('delete_subject/<subject_id>/', HodViews.delete_subject, name="delete_subject"), 
     #faculty urls
     path('staff_home/', StaffViews.staff_home, name="staff_home"),
-     path('staff_notes/', StaffViews.staff_notes, name="staff_notes"), 
+    path('staff_notes/', StaffViews.staff_notes, name="staff_notes"), 
     path('staff_profile/', StaffViews.staff_profile, name="staff_profile"), 
     path('staff_profile_update/', StaffViews.staff_profile_update, name="staff_profile_update"), 
     path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"),
@@ -68,6 +68,10 @@ urlpatterns = [
     path('get_attendance_dates/', StaffViews.get_attendance_dates, name="get_attendance_dates"), 
     path('get_attendance_student/', StaffViews.get_attendance_student, name="get_attendance_student"), 
     path('update_attendance_data/', StaffViews.update_attendance_data, name="update_attendance_data"), 
+
+    # attendance
+    path('add_attendace/', StaffViews.add_attendance, name="add_attendace"),
+    path('edit_attendace/', StaffViews.edit_attendance, name="edit_attendace")
    
      
 ]

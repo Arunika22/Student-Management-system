@@ -1,12 +1,3 @@
-function changeClass(e) {
-    const value = e.target.value;
-    const url = new URL(window.location.href);
-
-    url.searchParams.set('class', value);
-
-    window.location.href = url.toString();
-}
-
 function openAddDialog() {
     console.log("Opening add dialog"); // Debug statement
     document.querySelector('#add_dialog')?.showModal();
@@ -17,10 +8,9 @@ function closeAddDialog() {
 }
 
 function openEditDialog() {
-    
+
     document.querySelector('#edit_dialog')?.showModal();
     //new code
-    
 }
 
 function closeEditDialog() {
@@ -35,6 +25,10 @@ function closeAddAttendanceDialog() {
     document.querySelector('#add_attendance_dialog')?.close();
 }
 
+function printReport() {
+    window.print()
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.search-form').forEach(searchForm => {
         searchForm.addEventListener('submit', function (e) {
@@ -44,10 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchData = input.value.toLowerCase(),
                 record = document.querySelector(searchForm.dataset.searchRecord);
             record.querySelectorAll('tr').forEach(tr => {
-                
-                if(tr.innerText.toLowerCase().indexOf(searchData) > -1) {
+
+                if (tr.innerText.toLowerCase().indexOf(searchData) > -1) {
                     tr.style.display = 'table-row';
-                }else 
+                } else
                     tr.style.display = 'none';
             })
         })

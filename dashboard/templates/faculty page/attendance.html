@@ -24,86 +24,71 @@
             </a>
         </div>
 
-        <div class="user">
-            <div>
-                <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="user-image" />
-            </div>
-            <div class="name">username</div>
-
-            <ul>
-                <li>Logout</li>
-            </ul>
-        </div>
+        {% include "../headerUser.html" %}
     </header>
 
     <div id="main">
-        <div id="navbar">
-            <div class="menu">Menu</div>
-            <nav>
-                <a href="index.html">
-                    <li>
-                        <i class="fa fa-home"></i> Home
-                    </li>
-                </a>
-                <a href="profile.html">
-                    <li>
-                        <i class="fa fa-user"></i>
-                        Profile
-                    </li>
-                </a>
-                <a href="attendance.html">
-                    <li>
-                        <i class="fa-solid fa-user-plus"></i>
-                        Attendance
-                    </li>
-                </a>
-                <a href="notes.html">
-                    <li>
-                        <i class="fa-solid fa-book"></i>
-                        Notes
-                    </li>
-                </a>
-                <a href="videos.html">
-                    <li>
-                        <i class="fa-solid fa-video"></i>
-                        Videos
-                    </li>
-                </a>
-            </nav>
-        </div>
+        {% include "./navigation.html" %}
 
         <div id="student_record">
             <div class="row" id="attendance_title">
-                <div>CSE B2</div>
-                <div>Database Management System</div>
-                <div>CS211056</div>
+                <div>{{active_session.session_start_year}}</div>
+                <div>{{active_subject.subject_name}}</div>
+                <div>Subject Code {{active_subject.id}}</div>
             </div>
-
 
 
 
             <div class="page-title">
                 <div class="row" id="attendance_list">
                     <h2>Attendance List</h2>
+                    <form id="load_new_attendance">
+                        <select name="session" >
+                            <option value="" selected  disabled>Choose Class</option>
 
-                    <select onchange="changeClass(event)">
-                        <option>B2 CS2110</option>
-                        <option>B2 CS2010</option>
-                        <option>B2 CS1910</option>
-                    </select>
+                            {% for session_year in session_years %}
+                                <option value="{{session_year.id}}" 
+                                {% if active_session.id == session_year.id %}
+                                    selected
+                                {% endif %}
+                                >{{session_year.session_start_year}} - {{session_year.session_end_year}}</option>
+
+                            {% endfor %}
+                        </select>
+
+                        <select name="subject">
+                            <option value="" selected  disabled>Choose Subject</option>
+
+                            {% for subject in subjects %}
+                                <option value="{{subject.id}}" 
+                                {% if active_subject.id == subject.id %}
+                                    selected
+                                {% endif %}
+                                >{{subject.subject_name}}</option>
+
+                            {% endfor %}
+                        </select>
+
+                        <input type="date" name="date" value="{{date}}" required />
+
+                        <button type="submit" class="btn-success">Fetch</button>
+                    </form>
                 </div>
                 <div class=" row" id="attendance_action">
                     <div onclick="openAddAttendanceDialog()">Add <i class="fa-solid fa-plus"></i></div>
                     <div onclick="openEditDialog()">Edit <i class="fa-solid fa-pen-to-square"></i></div>
-                    <div>Report <i class="fa fa-download"></i></div>
+                    <div onclick="printReport()">Report <i class="fa fa-download"></i></div>
                 </div>
             </div>
 
             <dialog class="form" id="add_attendance_dialog">
                 <div class="close" onclick="closeAddAttendanceDialog()">&times;</div>
                 <!-- <div className="form"> -->
-                <form onSubmit={handleSubmit}>
-                    <input type="hidden" name="id" value={formResponse?.id} />
+                <form action="{% url 'add_attendace' %}" method="post" onSubmit="handleAttendanceSubmit(event)">
+                    {% csrf_token %}
+                    
+                    <input type="hidden" name="subject_id" value={{active_subject.id}} />
+                    <input type="hidden" name="session_id" value={{active_session.id}} />
                     <div class="row">
                         <h3>Add Attendance</h3>
                     </div>
@@ -119,23 +104,30 @@
                                     <tr>
                                         <th>Student Name</th>
                                         <th>Roll No</th>
-                                        <th>Attendance Date</th>
+                                        {% comment %} <th>Attendance Date</th> {% endcomment %}
                                         <th>Status</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+                                    {% for student in students %}
                                     <tr>
-                                        <td>Priyanka Tiwari</td>
-                                        <td>66</td>
-                                        <td>March 5, 2023</td>
+                                        <td>{{student.admin.first_name}} {{student.admin.last_name}}</td>
+                                        <td>{{student.admin.id}}</td>
+                                        {% comment %} <td>March 5, 2023</td> {% endcomment %}
                                         <td>
                                             <div class="checkbox">
-                                                <input type="checkbox" />
+                                                <input type="hidden" name="student[]" value="{{student.id}}" />
+                                                <input type="checkbox" name="attendance[]" value="true" />
                                                 <span class="trigger"></span>
                                             </div>
                                         </td>
                                     </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="4">No Records Available</td>
+                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -151,46 +143,68 @@
             <dialog class="form" id="edit_dialog">
                 <div class="close" onclick="closeEditDialog()">&times;</div>
                 <!-- <div className="form"> -->
-                <form onSubmit={handleSubmit}>
-                    <input type="hidden" name="id" value={formResponse?.id} />
-                    <div class="row">
-                        <h3>Edit Attendance</h3>
-                    </div>
-                    <div class="form-field">
-                        <label for="text">Attendance Date</label>
-                        <input type="date" name="date" id="date" required />
-                    </div>
-
-                    <div class="form-field">
-                        <div id="faculty-record" class="record">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Student Name</th>
-                                        <th>Roll No</th>
-                                        <th>Attendance Date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td>Priyanka Tiwari</td>
-                                        <td>66</td>
-                                        <td>March 5, 2023</td>
-                                        <td><span class="present"></span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                {% if attendance == None %}
+                    <h2 class="error">No Record available for this date!!</h2>
+                {% else %}
+                    <form action="{% url 'edit_attendace' %}" method="post" onSubmit="handleAttendanceSubmit(event)">
+                        {% csrf_token %}
+                        <input type="hidden" name="attendance_id" value={{attendance.id}} />
+                        <div class="row">
+                            <h3>Edit Attendance</h3>
                         </div>
-                    </div>
+                        <div class="form-field">
+                            <label for="text" class="attendance-date">Attendance Date : {{attendance.attendance_date}}</label>
+                        </div>
 
-                    <div class="form-field">
-                        <button type="submit">Save</button>
-                    </div>
-                </form>
+                        <div class="form-field">
+                            <div id="faculty-record" class="record">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Student Name</th>
+                                            <th>Roll No</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+    
+                                    <tbody>
+                                        {% for record in attendace_report %}
+                                        <tr>
+                                            <td>{{record.student_id.admin.first_name}} {{record.student_id.admin.last_name}}</td>
+                                            <td>{{record.student_id.admin.id}}</td>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <input type="hidden" name="record_id[]" value="{{record.id}}" />
+                                                    <input type="checkbox" name="attendance[]" value="true"
+                                                    {% if record.status == True %}
+                                                    checked
+                                                    {% endif %}
+                                                    />
+                                                    <span class="trigger"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="4">No Records Available</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <button type="submit">Save</button>
+                        </div>
+                    </form>
+                {% endif %}
                 <!-- </div> -->
             </dialog>
+
+            {% if attendance.attendance_date != None %}
+                <div class="row attendance-date">Date : {{attendance.attendance_date}}</div>
+            {% endif %}
 
             <div id="faculty-record" class="record">
                 <table>
@@ -198,29 +212,66 @@
                         <tr>
                             <th>Student Name</th>
                             <th>Roll No</th>
-                            <th>Attendance Date</th>
                             <th>Attendance Status</th>
                         </tr>
                     </thead>
 
                     <tbody>
+                        {% for row in attendace_report %}
+                            <tr>
+                                <td>{{row.student_id.admin.first_name}} {{row.student_id.admin.last_name}}</td>
+                                <td>{{row.student_id.id}}</td>
+                                <td>
+                                    {% if row.status %}
+                                        Present
+                                    {% else %}
+                                        Absent
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
                         <tr>
-                            <td>Priyanka Tiwari</td>
-                            <td>66</td>
-                            <td>March 5, 2023</td>
-                            <td><span class="present"></span></td>
+                            <td colspan="4">No records Available</td>
                         </tr>
-                        <tr>
-                            <td>Priyanka Tiwari</td>
-                            <td>66</td>
-                            <td>March 5, 2023</td>
-                            <td><span class="present"></span></td>
-                        </tr>
+                        {% endfor %}
+                       
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <script type="text/javascript" >
+        async function handleAttendanceSubmit (e) {
+            e.preventDefault();
+
+            const form = e.target,
+                action = form.action,
+                method = form.method,
+                formData = new FormData(form),
+                attendance = [];
+                
+            // removing previous attendance
+            formData.delete('attendance[]')
+            form.querySelectorAll('tr td input[type=checkbox]').forEach(input => {
+                formData.append('attendance[]', (input.checked ? "true" : "false"));
+            })
+            {% comment %} formData.set('attendance[]', attendance); {% endcomment %}
+
+
+            const res = await fetch(action, {
+                method,
+                body : formData,
+            })
+
+            console.log(res)
+
+            const data = await res.text();
+
+            console.log(data)
+
+        }
+
+    </script>
 </body>
 
 </html>
