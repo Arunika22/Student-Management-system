@@ -263,11 +263,11 @@
                 body : formData,
             })
 
-            console.log(res)
-
             const data = await res.text();
 
-            console.log(data)
+            if(res.ok) {
+                window.location.reload()
+            }
 
         }
 
