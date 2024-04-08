@@ -26,7 +26,7 @@ function closeAddAttendanceDialog() {
 }
 
 function printReport() {
-    console.log("Opening print dialog"); 
+    console.log("Opening print dialog");
     window.print()
 }
 
@@ -37,11 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const input = searchForm.search,
                 searchData = input.value.toLowerCase(),
-                record = document.querySelector(searchForm.dataset.searchRecord);
-            record.querySelectorAll('tr').forEach(tr => {
+                record = document.querySelectorAll(searchForm.dataset.searchRecord);
+
+            record.forEach(tr => {
 
                 if (tr.innerText.toLowerCase().indexOf(searchData) > -1) {
-                    tr.style.display = 'table-row';
+                    tr.style.display = searchForm.dataset.style ?? 'table-row';
                 } else
                     tr.style.display = 'none';
             })

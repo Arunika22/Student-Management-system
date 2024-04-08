@@ -106,12 +106,11 @@ a {
     font-size: 15px;
 }
 
-.record td .edit,
-.record td .delete {
+.record td .btn {
     height: 25px;
     line-height: 25px;
     border: 0;
-    margin: 0 10px;
+    margin: 0 3px;
     padding: 0 10px;
     border-radius: 3px;
     display: inline-block;
@@ -128,10 +127,8 @@ a {
 }
 
 .record td .download {
-    display: inline-block;
-    line-height: 30px;
-    padding: 0 10px;
-    border-radius: 5px;
+    background: var(--light-blue);
+    color: var(--white);
 }
 
 .form {
