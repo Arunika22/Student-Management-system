@@ -7,7 +7,13 @@ from django.urls import reverse
 import datetime 
 from .models import CustomUser, Staffs, Courses, Subjects, Students, Attendance, AttendanceReport, LeaveReportStudent, FeedBackStudent, StudentResult,Notes
 def student_home(request):
-    return render(request,'student page/student_home.html')
+    subject = Subjects.objects.count()
+    context ={
+        "subject" : subject,
+       
+
+    }
+    return render(request,'student page/student_home.html',context)
 def student_profile(request): 
     user = CustomUser.objects.get(id=request.user.id) 
     student = Students.objects.get(admin=user) 
