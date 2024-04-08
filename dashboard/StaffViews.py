@@ -15,7 +15,17 @@ from .forms import NotesForm
 from .models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, Attendance, AttendanceReport, LeaveReportStaff, FeedBackStaffs, StudentResult,Notes
 
 def staff_home(request):
-    return render(request,'faculty page/faculty_home.html')
+    subject = Subjects.objects.filter(staff_id=request.user.id).count()
+    
+    student = Students.objects.count()
+    course = Courses.objects.count()
+    context ={
+        "subject" : subject,
+       
+        "student" : student,
+        "course" : course
+    }
+    return render(request,'faculty page/faculty_home.html',context)
 def staff_notes(request):
     staff = Staffs.objects.get(admin=request.user.id) 
     uploaded_notes = Notes.objects.filter(uploaded_by=request.user.staffs)
