@@ -177,20 +177,15 @@
                             <td>{{ note.upload_date }}</td>
                             <td>
                                 <div class="actions">
-                                    <a href="{{ note.document.url }}" download>Download</a>
+                                    <a href="{{ note.document.url }}" class="download btn" download>Download</a>
                                     <button class="edit btn" onclick="openEditDialog('{{ note.id }}')">
-
-
-                                        
                                         {% comment %} <a href="{% url 'edit_notes' note.id %}"> {% endcomment %}
                                         Edit
                                         {% comment %} </a> {% endcomment %}
                                     </button>
-                                    <button class="delete btn">
-                                        <a href="{% url 'delete_notes' note.id %}" >
+                                    <a href="{% url 'delete_notes' note.id %}" class="delete btn">
                                         Delete
-                                        </a>
-                                    </button>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
