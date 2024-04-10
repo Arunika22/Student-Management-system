@@ -131,3 +131,12 @@ def get_user_type_from_email(email_id):
 		return CustomUser.EMAIL_TO_USER_TYPE_MAP[email_user_type]
 	except:
 		return None
+
+def live_stream(request) :
+	user_type = request.user.user_type
+
+	if(user_type == '2'):
+		return render(request, "faculty page/videos.html")
+
+	if(user_type == '3'):
+		return render(request, "student page/videos.html")

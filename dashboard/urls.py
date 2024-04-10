@@ -66,6 +66,7 @@ urlpatterns = [
     path('upload_notes/', StaffViews.upload_notes, name="upload_notes"),
     path('edit_notes/<int:note_id>/', StaffViews.edit_notes, name='edit_notes'),
     path('delete_notes/<int:note_id>/', StaffViews.delete_notes, name='delete_notes'),
+    path('live-stream', views.live_stream, name="live_stream"),
     # path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"), 
     # path('get_students/', StaffViews.get_students, name="get_students"), 
     # path('save_attendance_data/', StaffViews.save_attendance_data, name="save_attendance_data"), 
