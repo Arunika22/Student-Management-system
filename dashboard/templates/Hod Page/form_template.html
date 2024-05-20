@@ -2,7 +2,7 @@
     {% csrf_token %}
 
 
-    {% comment %} Display Messages {% endcomment %}
+    {% comment %} Display Messages 
     {% if messages %}
     <div class="form-field">
         <div class="col-12">
@@ -26,7 +26,7 @@
         </div>
     </div>
     {% endif %}
-
+{% endcomment %}
     <div class="card-body">
         {% comment %} Adding Form with All inputs Here {% endcomment %}
         {% for field in form %}

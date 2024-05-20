@@ -130,7 +130,7 @@
                                 {% comment %} <th>Username</th> {% endcomment %}
                                 <th>Email</th>
                                 {% comment %} <th>Address</th> {% endcomment %}
-                                <th>Gender</th>
+                                {% comment %} <th>Gender</th> {% endcomment %}
                                 {% comment %} <th>Profile Pic</th> {% endcomment %}
                                 <th>Start Year</th>
                                 <th>End Year</th>
@@ -150,7 +150,7 @@
                             {% comment %} <td>{{ student.admin.username }}</td> {% endcomment %}
                             <td>{{ student.admin.email }}</td>
                             {% comment %} <td>{{ student.address }}</td> {% endcomment %}
-                            <td>{{ student.gender }}</td>
+                            {% comment %} <td>{{ student.gender }}</td> {% endcomment %}
                             {% comment %} <td> <img src="{{ student.profile_pic }}" style="width: 100px;" /> </td> {% endcomment %}
                             <td>{{ student.session_year_id.session_start_year }}</td>
                             <td>{{ student.session_year_id.session_end_year }}</td>
